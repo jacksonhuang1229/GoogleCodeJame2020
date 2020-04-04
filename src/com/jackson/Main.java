@@ -19,11 +19,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-	// write your code here
-        System.out.println("Hello world");
-
         new Main().run();
-
     }
 
     private void run() {
@@ -31,7 +27,8 @@ public class Main {
         FileReader reader = null;
         try{
             System.out.println("Working Directory = " +  System.getProperty("user.dir"));
-            reader = new FileReader("input");
+//            reader = new FileReader("input");
+            reader = new FileReader("a-input");
 //			reader = new FileReader("B-small-practice.in");
 //			reader = new FileReader("B-large-practice.in");
 
@@ -47,7 +44,15 @@ public class Main {
         for (int n = 0; n < numCases; n++)
         {
             int N = input.nextInt();
-            String result = GCJ2019AForegoneSolution(N);
+            int[][] matrix = new int[N][N];
+
+            for (int i = 0 ; i < N ; i++) {
+                for (int j = 0 ; j < N ; j++){
+                    matrix[i][j] = input.nextInt();
+                }
+            }
+
+            String result = solveA(matrix);
             System.out.println("Case #"+ (n+1) + ": " + result) ;
             writer.println("Case #"+ (n+1) + ": " + result) ;
 
@@ -66,6 +71,35 @@ public class Main {
         if(input !=null){
             input.close();
         }
+    }
+
+    String solveA(int[][] matrix) {
+        String result = "";
+        int N = matrix.length;
+        int k = 0  , r = 0 , c = 0;
+
+        for (int i = 0 ; i < N ; i++) {
+            k += matrix[i][i];
+            Set<Integer> sets = new HashSet<>();
+            for (int j = 0 ; j < N ; j++){
+                if (sets.contains(matrix[i][j])) {
+                    r++;
+                    break;
+                }
+                sets.add(matrix[i][j]);
+            }
+            sets.clear();
+            for (int j = 0 ; j < N ; j++){
+                if (sets.contains(matrix[j][i])) {
+                    c++;
+                    break;
+                }
+                sets.add(matrix[j][i]);
+            }
+        }
+        result = String.format("%d %d %d", k, r, c);
+
+        return result;
     }
 
     String GCJ2019AForegoneSolution(int N) {
