@@ -3,14 +3,14 @@ package com.jackson;
 
 import java.util.*;
 
-public class Solution {
+public class Solution3 {
     private static String output1 = "Case #%d: %s";
     public static void main(String[] args) {
         try {
             Scanner scanner = new Scanner(System.in);
             int t = scanner.nextInt();
             for (int caseNum = 1; caseNum <= t; ++caseNum) {
-                new Solution().getAnswer(caseNum, scanner);
+                new Solution3().getAnswer(caseNum, scanner);
             }
 
         } catch (Exception e) {
